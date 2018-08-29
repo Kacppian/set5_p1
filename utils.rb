@@ -1,4 +1,4 @@
-# Takes care of utility methods needed for processing
+# Responsibility - Utility methods needed for processing
 class Utils
   def self.word1_letters_in_word2?(word1, word2)
     letters_in_word1 = word1.split('')

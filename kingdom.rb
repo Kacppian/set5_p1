@@ -1,7 +1,7 @@
 require './utils'
-
+# Responsibility - Maintaining the state of a kingdom
 class Kingdom
-  attr_accessor :ruler_name, :emblem_name, :allies_list, :name
+  attr_accessor :name, :ruler_name, :emblem_name, :allies_list
 
   def initialize(name, ruler_name, emblem_name)
     @name = name

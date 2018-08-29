@@ -1,6 +1,6 @@
 # Assumptions -
 # 1. If two kingdoms have equal number of allies, then nobody gets to rule
-
+# Responsibility - Maintaining the state of the Universe of Southeros
 class UniverseOfSoutheros
   attr_accessor :ruler_name, :kingdoms, :allies_required, :ruling_kingdom
 
@@ -10,15 +10,14 @@ class UniverseOfSoutheros
     @allies_required = allies_required
   end
 
-  def kingdoms_eligible_to_rule
+  def eligible_to_rule
     kingdoms.select {|name, instance| instance.allies_list.length >= allies_required}
   end
 
   def update_ruling_kingdom
     eligible_kingdoms = eligible_to_rule
     if eligible_kingdoms.keys.length == 1
-      ruling_kingdom = eligible_kingdoms.values.first
+      @ruling_kingdom = eligible_kingdoms.values.first
     end
-    ruling_kingdom
   end
 end

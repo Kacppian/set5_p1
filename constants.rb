@@ -1,6 +1,7 @@
 QUESTIONS = [
   'who is the ruler of southeros?',
-  'allies of ruler?'
+  'allies of ruler?',
+  'allies of king shan?'
 ].freeze
 
 

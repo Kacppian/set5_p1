@@ -22,7 +22,7 @@ class Cli
     @attacking_kingdom = @kingdom_instances["Space"]
     @universe_of_southeros = UniverseOfSoutheros.new(
                                                     kingdoms: @kingdom_instances,
-                                                    ruling_kingdom: @attacking_kingdom
+                                                    ruling_kingdom: nil
                                                     )
     @question = Question.new(universe_of_southeros)
   end
@@ -42,6 +42,7 @@ class Cli
   def process_message(kingdom_name, message)
     kingdom = @kingdom_instances[kingdom_name]
     attacking_kingdom.send_message(kingdom, message)
+    universe_of_southeros.update_ruling_kingdom
   end
 
   def delegate_processing(user_input)
@@ -53,7 +54,19 @@ class Cli
     end
   end
 
+  def help
+    puts '
+      You can ask questions like -
+        * Who is the ruler of Southeros?
+        * Allies of Ruler? / Allies of King Shan?
+      You can also send messages to kingdoms through King Shan like this -
+        * Air, "Let’s swing the sword together"
+        * Land, "Die or play the tame of thrones"
+    '
+  end
+
   def start_program
+    puts 'Press `h` for help and `q` for quitting the application!'
     loop do
       user_input = gets.chomp
       case user_input
@@ -69,4 +82,29 @@ class Cli
 end
 
 cli = Cli.new
-cli.start_program
+# cli.start_program
+
+inputs = [
+  'who is the ruler of southeros?',
+  'allies of ruler?',
+  'Air, "Let\'s swing the sword together"',
+  'Land, "Die or play the tame of thrones"',
+  'Ice, "Ahoy! Fight for me with men and money"',
+  'Water, "Summer is coming"',
+  'Fire, "Drag on Martin!"',
+  'who is the ruler of southeros?',
+  'allies of King Shan?',
+  'allies of ruler?'
+]
+
+# inputs = [
+#   'allies of king shan?'
+# ]
+
+inputs.each do |input|
+  puts '-------------'
+  puts input
+  cli.delegate_processing(input)
+end
+
+
